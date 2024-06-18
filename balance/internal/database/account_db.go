@@ -3,7 +3,7 @@ package database
 import (
 	"database/sql"
 
-	"github.com/NathanWMartins/eda-desafio/internal/entity"
+	"github.com/NathanWMartins/fc-ms-balance/internal/entity"
 )
 
 type AccountDB struct {

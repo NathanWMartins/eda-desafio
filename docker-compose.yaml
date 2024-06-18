@@ -2,26 +2,22 @@ version: '3'
 
 services:
   goapp-wallet:
-    build:
-      context: ./wallet
-      dockerfile: Dockerfile
+    build: ./wallet/.
     platform: linux/amd64
     depends_on:
       - mysql-wallet
-    entrypoint: ["dockerize", "-wait", "tcp://mysql-wallet:3306", "-timeout", "40s", ".docker/start.sh"]
+    entrypoint: dockerize -wait tcp://mysql-wallet:3306 -timeout 40s ./.docker/start.sh
     volumes:
       - ./wallet:/app
     ports:
       - 8080:8080
 
   goapp-balance:
-    build:
-      context: ./balance
-      dockerfile: Dockerfile
+    build: ./balance/.
     platform: linux/amd64
     depends_on:
       - mysql-balance
-    entrypoint: ["dockerize", "-wait", "tcp://mysql-balance:3306", "-timeout", "40s", ".docker/start.sh"]
+    entrypoint: dockerize -wait tcp://mysql-balance:3306 -timeout 40s ./.docker/start.sh
     volumes:
       - ./balance:/app
     ports:
@@ -52,7 +48,7 @@ services:
       - ./balance/.docker/mysql:/var/lib/mysql
 
   zookeeper:
-    image: confluentinc/cp-zookeeper:6.1.0
+    image: "confluentinc/cp-zookeeper:6.1.0"
     container_name: zookeeper
     ports:
       - 2181:2181
@@ -62,11 +58,14 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
 
   kafka:
-    image: confluentinc/cp-enterprise-kafka:6.1.0
+    image: "confluentinc/cp-enterprise-kafka:6.1.0"
     container_name: kafka
     depends_on:
       - zookeeper
     ports:
+      # Exposes 9092 for external connections to the broker
+      # Use kafka:29092 for connections internal on the docker network
+      # See https://rmoff.net/2018/08/02/kafka-listeners-explained/ for details
       - '9092:9092'
     environment:
       TZ: Sao_Paulo/Brazil
@@ -110,7 +109,7 @@ services:
 
       echo -e 'Creating kafka topics'
       kafka-topics --bootstrap-server kafka:29092 --create --if-not-exists --topic transactions --replication-factor 1 --partitions 1
-      kafka-topics --bootstrap-server kafka:29092 --create --if-not-exists --topic balance --replication-factor 1 --partitions 1
+      kafka-topics --bootstrap-server kafka:29092 --create --if-not-exists --topic balances --replication-factor 1 --partitions 1
 
       echo -e 'Successfully created the following topics:'
       kafka-topics --bootstrap-server kafka:29092 --list

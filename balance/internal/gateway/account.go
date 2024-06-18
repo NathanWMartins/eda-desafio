@@ -1,6 +1,6 @@
 package gateway
 
-import "github.com/NathanWMartins/eda-desafio/internal/entity"
+import "github.com/NathanWMartins/fc-ms-balance/internal/entity"
 
 type AccountGateway interface {
 	Save(account *entity.Account) error

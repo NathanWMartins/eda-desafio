@@ -1,6 +1,6 @@
 package getaccount
 
-import "github.com/NathanWMartins/eda-desafio/internal/gateway"
+import "github.com/NathanWMartins/fc-ms-balance/internal/gateway"
 
 type GetAccountInputDTO struct {
 	ID string `json:"account_id"`

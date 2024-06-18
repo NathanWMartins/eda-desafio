@@ -1,6 +1,9 @@
-#!/bin/sh
-# Execute migrações
-/app/migrate -path /app/migrations -database "mysql://root:root@tcp(mysql-balance:3306)/balance" up
+#!/bin/bash
 
-# Inicie a aplicação
-/app/main
+echo "####### Creating tables #######"
+make migrate
+
+echo "####### Starting Goclient #######" 
+go run ./cmd/balance/main.go
+
+tail -f /dev/null

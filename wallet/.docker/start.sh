@@ -1,6 +1,9 @@
-#!/bin/sh
-# Execute migrações
-/app/migrate -path /app/migrations -database "mysql://root:root@tcp(mysql-wallet:3306)/wallet" up
+#!/bin/bash
 
-# Inicie a aplicação
-/app/main
+echo "####### Creating tables #######"
+make migrate
+
+echo "####### Starting Goapp #######" 
+go run ./cmd/walletcore/main.go
+
+tail -f /dev/null

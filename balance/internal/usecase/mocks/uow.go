@@ -3,7 +3,7 @@ package mocks
 import (
 	"context"
 
-	"github.com/NathanWMartins/eda-desafio/pkg/uow"
+	"github.com/NathanWMartins/fc-ms-balance/pkg/uow"
 	"github.com/stretchr/testify/mock"
 )
 

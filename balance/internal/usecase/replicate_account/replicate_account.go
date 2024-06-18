@@ -3,9 +3,9 @@ package replicateaccount
 import (
 	"context"
 
-	"github.com/NathanWMartins/eda-desafio/internal/entity"
-	"github.com/NathanWMartins/eda-desafio/internal/gateway"
-	"github.com/NathanWMartins/eda-desafio/pkg/uow"
+	"github.com/NathanWMartins/fc-ms-balance/internal/entity"
+	"github.com/NathanWMartins/fc-ms-balance/internal/gateway"
+	"github.com/NathanWMartins/fc-ms-balance/pkg/uow"
 )
 
 type BalanceUpdatedInputDTO struct {

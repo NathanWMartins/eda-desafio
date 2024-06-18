@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	getaccount "github.com/NathanWMartins/eda-desafio/internal/usecase/get_account"
+	getaccount "github.com/NathanWMartins/fc-ms-balance/internal/usecase/get_account"
 	"github.com/go-chi/chi/v5"
 )
 

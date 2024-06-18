@@ -1,7 +1,7 @@
 package mocks
 
 import (
-	"github.com/NathanWMartins/eda-desafio/internal/entity"
+	"github.com/NathanWMartins/fc-ms-balance/internal/entity"
 	"github.com/stretchr/testify/mock"
 )
 
